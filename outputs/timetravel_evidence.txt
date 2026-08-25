@@ -1,0 +1,15 @@
+=== Time-travel (state history replay) Evidence ===
+original route: tool | answer present: True
+checkpoints in history: 8
+replayed forward from step: 4
+replay produced answer: True
+
+History trail (newest → oldest):
+  [0] step=6 next=[]
+  [1] step=5 next=['finalize']
+  [2] step=4 next=['answer']
+  [3] step=3 next=['evaluate']
+  [4] step=2 next=['tool']
+  [5] step=1 next=['classify']
+  [6] step=0 next=['intake']
+  [7] step=-1 next=['__start__']

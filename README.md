@@ -213,6 +213,56 @@ Pick one or more:
 
 ---
 
+## Extensions (all implemented)
+
+Every Phase-5 extension is built and verified. Evidence is written to `outputs/`.
+
+```bash
+# Run every backend extension demo → writes evidence files to outputs/
+make demos
+# or individually:
+python -m langgraph_agent_lab.cli parallel-demo     # Send() fan-out/fan-in
+python -m langgraph_agent_lab.cli hitl-demo --approve   # interrupt()/resume (approve)
+python -m langgraph_agent_lab.cli hitl-demo --reject    # interrupt()/resume (reject)
+python -m langgraph_agent_lab.cli timetravel-demo   # get_state_history() replay
+python -m langgraph_agent_lab.cli crash-demo        # crash recovery across processes
+python -m langgraph_agent_lab.cli persist-demo      # SQLite state history
+python -m langgraph_agent_lab.cli diagram           # Mermaid graph export
+```
+
+| Extension | Module | Evidence |
+|---|---|---|
+| Parallel fan-out / fan-in (`Send()`) | `parallel.py` | `outputs/parallel_evidence.txt` |
+| Real HITL (`interrupt()` + `Command(resume)`) | `nodes.py`, `extensions.py` | `outputs/hitl_evidence.txt` |
+| Time-travel replay (`get_state_history`) | `extensions.py` | `outputs/timetravel_evidence.txt` |
+| Crash recovery across processes | `crash_child.py`, `cli.py` | `outputs/crash_evidence.txt` |
+| SQLite persistence (WAL) | `persistence.py` | `outputs/persistence_evidence.txt` |
+| Graph diagram (Mermaid) | `cli.py` | `outputs/graph_diagram.mmd` |
+| LLM-as-judge (evaluate) | `nodes.py` | enable `LAB_LLM_JUDGE=true` |
+
+### Ant Design HITL console (FastAPI + React 18 + antd 5)
+
+A full web console is the human interface for the real-HITL track. Submitting a
+**risky** ticket pauses the graph at `interrupt()`; the reviewer approves/rejects
+in the UI and the graph resumes via `Command(resume=...)`. State is durable in
+SQLite, so pending approvals survive a server restart.
+
+```bash
+# 1) Backend deps
+pip install -e '.[ui]'
+# 2) Build the Ant Design frontend (needs Node ≥ 18)
+make ui-install && make ui-build
+# 3) Run the server (serves the built UI at http://127.0.0.1:8000)
+make serve
+```
+
+For frontend development with hot reload, run the backend (`make serve`) and, in a
+second terminal, `cd ui && npm run dev` (Vite proxies `/api` to the backend).
+
+Screenshots of the flow live in `docs/screenshots/`:
+`ui-initial.png` → `ui-approval.png` (paused for approval) → `ui-completed.png`
+(resumed & completed) → `ui-graph.png` (live Mermaid topology).
+
 ## Submission checklist
 
 - [ ] All `TODO(student)` sections implemented

@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  background: #f5f5f7;
+}
+
+/* Highlight rows that are waiting on a human decision. */
+.row-pending > td {
+  background: #fffbe6 !important;
+}

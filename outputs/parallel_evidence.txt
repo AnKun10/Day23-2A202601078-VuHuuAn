@@ -1,0 +1,8 @@
+=== Parallel Fan-out / Fan-in Evidence ===
+subtasks dispatched (concurrent): ['inventory', 'pricing', 'shipping']
+results gathered: 3
+  - OK[inventory]: result for 'Prepare a full order summary f'
+  - OK[pricing]: result for 'Prepare a full order summary f'
+  - OK[shipping]: result for 'Prepare a full order summary f'
+
+final_answer: Aggregated 3 parallel tool results: OK[inventory]: result for 'Prepare a full order summary f'; OK[pricing]: result for 'Prepare a full order summary f'; OK[shipping]: result for 'Prepare a full order summary f'

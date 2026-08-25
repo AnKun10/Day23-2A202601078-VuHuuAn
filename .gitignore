@@ -21,10 +21,17 @@ env/
 # Environment
 .env
 
-# Persistence
+# Persistence (binary checkpoint DBs — evidence .txt/.json/.mmd are kept)
 checkpoints.db
 checkpoints.db-wal
 checkpoints.db-shm
+outputs/*.sqlite
+outputs/*.sqlite-wal
+outputs/*.sqlite-shm
+
+# Node / frontend build artifacts
+node_modules/
+ui/dist/
 
 # Testing
 .pytest_cache/

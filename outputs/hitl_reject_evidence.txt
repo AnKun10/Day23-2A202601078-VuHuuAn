@@ -1,0 +1,9 @@
+=== Real HITL (interrupt / resume) Evidence ===
+decision: REJECT
+paused at interrupt: True
+paused next nodes: ['approval']
+interrupt payload: {'proposed_action': "Proposed high-risk action derived from request: 'Refund this customer and send confirmation email'. This has side effects (data mutation / financial / communication) and requires human approval before execution.", 'question': 'Approve this action?'}
+human decision: {'approved': False, 'reviewer': 'human-demo', 'comment': 'decided via HITL demo'}
+resumed route: risky
+resumed approval: {'approved': False, 'reviewer': 'human-demo', 'comment': 'decided via HITL demo'}
+resumed final_answer: Could you please provide the customer's order number or any specific details related to the refund?

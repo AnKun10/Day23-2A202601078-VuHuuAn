@@ -1,0 +1,21 @@
+=== SQLite Persistence Evidence ===
+thread_id: thread-persist_demo
+db file: outputs\checkpoints.sqlite
+final route: simple | final_answer set: True
+checkpoints in history: 12
+resumed state has answer: True
+resumed next nodes: ()
+
+Checkpoint trail (newest → oldest):
+  [0] step=10 next=() wrote=[]
+  [1] step=9 next=('finalize',) wrote=[]
+  [2] step=8 next=('answer',) wrote=[]
+  [3] step=7 next=('classify',) wrote=[]
+  [4] step=6 next=('intake',) wrote=[]
+  [5] step=5 next=('__start__',) wrote=[]
+  [6] step=4 next=() wrote=[]
+  [7] step=3 next=('finalize',) wrote=[]
+  [8] step=2 next=('answer',) wrote=[]
+  [9] step=1 next=('classify',) wrote=[]
+  [10] step=0 next=('intake',) wrote=[]
+  [11] step=-1 next=('__start__',) wrote=[]

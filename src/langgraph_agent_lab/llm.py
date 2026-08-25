@@ -13,6 +13,13 @@ from __future__ import annotations
 
 import os
 
+try:  # Load .env once on import so API keys are visible without manual export.
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:
+    pass
+
 
 def get_llm(model: str | None = None, temperature: float = 0.0):
     """Create an LLM client from environment configuration.
