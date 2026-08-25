@@ -28,6 +28,7 @@ openai = ["langchain-openai>=0.3.0"]
 anthropic = ["langchain-anthropic>=0.3.0"]
 sqlite = ["langgraph-checkpoint-sqlite>=2.0"]
 postgres = ["langgraph-checkpoint-postgres>=2.0"]
+ui = ["fastapi>=0.110", "uvicorn>=0.29", "python-dotenv>=1.0"]
 
 [project.scripts]
 agent-lab = "langgraph_agent_lab.cli:app"

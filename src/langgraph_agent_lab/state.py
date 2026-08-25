@@ -41,8 +41,10 @@ class ApprovalDecision(BaseModel):
 class AgentState(TypedDict, total=False):
     """LangGraph state.
 
-    TODO(student): decide which fields should be append-only and which should be overwritten.
-    The current annotations give a safe starting point for auditability.
+    Reducer choice: audit/history fields (messages, tool_results, errors, events)
+    are append-only via the `add` reducer; control fields (route, attempt,
+    evaluation_result, approval, ...) overwrite because only the latest value
+    matters for the current routing decision.
     """
 
     thread_id: str
@@ -53,9 +55,18 @@ class AgentState(TypedDict, total=False):
     attempt: int
     max_attempts: int
     final_answer: str | None
-    # TODO(student): you will need additional fields for clarification, risky actions,
-    # approval decisions, and retry-loop gating. Add them as you implement nodes.
-    # Hint: check what your nodes return and what your routing functions read.
+
+    # ── Student-added control fields (overwrite semantics) ──────────────
+    # These carry the *latest* decision only, so they overwrite instead of
+    # appending. They gate conditional edges in routing.py.
+    evaluation_result: str      # "success" | "needs_retry" — drives route_after_evaluate
+    pending_question: str        # clarification question for missing_info flow
+    proposed_action: str         # description of a risky action awaiting approval
+    approval: dict[str, Any]     # ApprovalDecision payload — drives route_after_approval
+
+    # ── Append-only audit / history fields (reducer = add) ──────────────
+    # Every node contributes; we never want to lose earlier entries, so the
+    # `add` reducer concatenates partial updates instead of overwriting.
     messages: Annotated[list[str], add]
     tool_results: Annotated[list[str], add]
     errors: Annotated[list[str], add]

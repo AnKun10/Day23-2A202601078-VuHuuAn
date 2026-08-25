@@ -1,3 +1,10 @@
 scenarios_path: data/sample/scenarios.jsonl
 checkpointer: memory
 report_path: reports/lab_report.md
+
+# Fills the report identity header (edit to taste).
+student:
+  name: Vũ Hữu An
+  id: "2A202601078"
+  date: "2026-08-25"
+  repo: Day23-2A202601078-VuHuuAn

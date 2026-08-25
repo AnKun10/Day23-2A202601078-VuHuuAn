@@ -1,0 +1,8 @@
+=== Crash Recovery (across processes) Evidence ===
+child process (writer, then died): CHILD_PAUSED=True
+parent read paused state from disk → next nodes: ['approval']
+parent route recovered: risky
+parent resumed with human approval →
+  final route: risky
+  final_answer set: True
+  approval reviewer: human-after-restart
